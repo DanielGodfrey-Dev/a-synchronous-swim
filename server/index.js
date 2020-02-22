@@ -2,8 +2,7 @@ const messageQueue = require('./js/messageQueue.js');
 
 
 const keypressHandler = require('./js/keypressHandler');
-keypressHandler.initialize(message => {console.log(`Message received: ${message}`);
-messageQueue.enqueue(message)});
+keypressHandler.initialize(messageQueue.enqueue);
 
 const httpHandler = require('./js/httpHandler');
 

@@ -2,16 +2,17 @@
 
   const serverUrl = 'http://127.0.0.1:3000';
 
-    // var ajaxCall = $.ajax({
-    //   type: 'GET',
-    //   url: serverUrl,
-    //   success: (data) => {
-    //     SwimTeam.move(data);
-    //     console.log('going -->>' + data);
-    //   }
-    // });
+    var ajaxCall = () => {
+      $.ajax({
+        type: 'GET',
+        url: serverUrl,
+        success: (data) => {
+          SwimTeam.move(data);
+        }
+    });
+  }
 
-    // setInterval(ajaxCall, 500);
+    setInterval(ajaxCall, 2500);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
