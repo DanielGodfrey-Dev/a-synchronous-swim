@@ -16,11 +16,18 @@ module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
   var commands = ['up', 'down', 'left', 'right'];
   var index = Math.floor(Math.random() * commands.length);
+  // if (req.method === 'GET') {
+  //   res.end(commands[index]);
+  // } else {
+  //   res.end();
+  // }
   if (req.method === 'GET') {
-    res.end(commands[index]);
+    res.writeHead(200, headers);
+    console.log(messageQueue.dequeue);
+    res.end(messageQueue.dequeue);
   } else {
     res.end();
   }
-  res.writeHead(200, headers);
+
   next(); // invoke next() at the end of a request to help with testing!
 };
