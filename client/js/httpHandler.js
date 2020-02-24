@@ -2,17 +2,17 @@
 
   const serverUrl = 'http://127.0.0.1:3000';
 
-  var ajaxCall = () => {
+  const ajaxCall = () => {
     $.ajax({
       type: 'GET',
       url: serverUrl,
       success: (data) => {
         SwimTeam.move(data);
-      },
+      } //do more research on complete: 
     });
   };
 
-  setInterval(ajaxCall, 10);
+  setInterval(ajaxCall, 2000);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -25,7 +25,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl + '/background.jpg',
       cache: false,
       contentType: false,
       processData: false,

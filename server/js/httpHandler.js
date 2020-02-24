@@ -22,10 +22,42 @@ module.exports.router = (req, res, next = ()=>{}) => {
   }
 
   if (req.method === 'GET') {
-    var commands = ['up', 'down', 'left', 'right'];
-    var index = Math.floor(Math.random() * commands.length);
-    res.writeHead(200, headers);
-    res.end(messageQueue.dequeue());
-    next();
-  } 
+    if (req.url === '/') {
+    // var commands = ['up', 'down', 'left', 'right'];
+    // var index = Math.floor(Math.random() * commands.length);
+      res.writeHead(200, headers);
+      res.end(messageQueue.dequeue());
+    } else if (req.url === '/background.jpg') {
+      fs.readFile(module.exports.backgroundImageFile, (err, data) => {
+        if (err) {
+          res.writeHead(404, headers);
+        } else {
+          res.writeHead(200, headers);
+          res.write(data, 'binary');
+        }
+          res.end();
+          next();
+      });
+    }
+  }
+
+  if (req.method === 'POST' && req.url === '/background.jpg') {
+
+    var fileData = Buffer.alloc(0);
+
+    req.on('data', (chunk) => {
+      console.log('chunk received yo!');
+      fileData = Buffer.concat([fileData, chunk]);
+    });
+
+    req.on('end', () => {
+      fs.writeFile(module.exports.backgroundImageFile, fileData, (err) => {
+        res.writeHead(err ? 400 : 201, headers);
+        res.end();
+        next();
+    });
+  });
+  }
+
 };
+
