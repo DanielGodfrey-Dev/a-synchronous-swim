@@ -46,12 +46,14 @@ module.exports.router = (req, res, next = ()=>{}) => {
     var fileData = Buffer.alloc(0);
 
     req.on('data', (chunk) => {
-      console.log('chunk received yo!');
+      console.log('chunk received!');
       fileData = Buffer.concat([fileData, chunk]);
     });
 
     req.on('end', () => {
-      fs.writeFile(module.exports.backgroundImageFile, fileData, (err) => {
+      var file = multipart.getFile(fileData);
+
+      fs.writeFile(module.exports.backgroundImageFile, file.data, (err) => {
         res.writeHead(err ? 400 : 201, headers);
         res.end();
         next();
