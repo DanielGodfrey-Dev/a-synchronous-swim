@@ -2,15 +2,17 @@
 
   const serverUrl = 'http://127.0.0.1:3000';
 
-/*after as much work as I could do with my pair, I decided
-a maximal amount of lessons were learned autonmously
-and decided to start implementing according to solutions
-video from this point forward for the sake of expediency and
-completeness.
-*/
+  var ajaxCall = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: (data) => {
+        SwimTeam.move(data);
+      },
+    });
+  };
 
-
-
+  setInterval(ajaxCall, 10);
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!

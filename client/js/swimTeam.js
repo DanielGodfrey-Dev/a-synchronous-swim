@@ -9,7 +9,7 @@ const SwimTeam = {
     if (!SwimTeam.valid(direction)) {
       return;
     }
-    console.log(`Lets go: ${direction}`);
+    console.log(`We goin': ${direction}`);
 
     // set the swim-team's direction
     $('.swimmer')
